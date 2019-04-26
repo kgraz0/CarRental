@@ -17,6 +17,7 @@ public static void main (String args[]) {
     */
     availableCars.add(new Car("Audi", "A1", "Estate", "SL42 SMR", 30000, 9, 100, 20));
     availableCars.add(new Car("Audi", "A1", "Hatchback", "ER39 DLR", 95000, 9, 200, 20));
+    availableCars.add(new Car("Audi", "A1", "Hatchback", "BR11 LDI", 50000, 9, 300, 20));
     availableCars.add(new Car("Audi", "A3", "Estate", "DA28 ABL", 1000, 16, 500, 10));
     availableCars.add(new Car("Audi", "A3", "Hatchback", "A9W2 1AF", 20000, 19, 250, 15));
     availableCars.add(new Car("BMW", "S1", "Estate", "A5M3 1K2", 5000, 18, 300, 10));
@@ -31,7 +32,6 @@ public static void main (String args[]) {
     Scanner userPropertySelect = new Scanner(System.in);
 
     String make, model, style = "";
-    int rentDays;
 
     while (true) {
     String userInputMake = userPropertySelect.next();
@@ -82,9 +82,25 @@ int userInputRentDays = -1;
             break;
         }
     } catch (InputMismatchException e) {
-    System.out.println("Entered a String!");
+    System.out.println("Please enter a number.");
 } userPropertySelect.nextLine();
 }
+
+//String make, model, style and userInputRentDays;
+selectAvailableCar(make, model, style);
+}
+
+public static void selectAvailableCar(String userInputMake, String userInputModel, String userInputStyle) {
+
+    ArrayList<Car> foundAvailableCars = new ArrayList<Car>(); 
+    
+    for (Car car : availableCars) {
+        if (userInputMake.equalsIgnoreCase(car.getMake()) && userInputModel.equalsIgnoreCase(car.getModel()) && userInputStyle.equalsIgnoreCase(car.getStyle())) {
+            foundAvailableCars.add(car);
+        }
+    }
+
+    System.out.println(foundAvailableCars);
 }
 
 public static boolean checkifMakeExists(String userInputMake) {
