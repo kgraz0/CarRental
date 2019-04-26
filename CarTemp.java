@@ -89,7 +89,12 @@ int userInputRentDays = -1;
 ArrayList<Car> foundAvailableCars = selectAvailableCar(make, model, style);
 System.out.println("Available cars found based on your search query: " + make.toUpperCase() + " " + model.toUpperCase() + " " + style.toUpperCase());
 System.out.println(foundAvailableCars);
+
+CarBooking selectedCar = new CarBooking(foundAvailableCars.get(0), userInputRentDays);
+selectedCar.setPriceWithTax(foundAvailableCars.get(0), userInputRentDays);
+System.out.println(selectedCar + "\n" + "\n" + "Thanks for booking with us!");
 }
+
 
 public static ArrayList<Car> selectAvailableCar(String userInputMake, String userInputModel, String userInputStyle) {
 
