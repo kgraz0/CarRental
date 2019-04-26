@@ -6,7 +6,7 @@ public class Car {
 	int totalMiles;
 	int insuranceGroup;
 	int taxRate;
-	static int dayBasePrice;
+    int dayBasePrice;
 
     public Car() {
     }
