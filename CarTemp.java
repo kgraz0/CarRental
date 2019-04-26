@@ -1,12 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.*;
+import java.lang.*;
 
 public class CarTemp {
 
+    public static ArrayList<Car> availableCars = new ArrayList<Car>();
+
 public static void main (String args[]) {
 
-    ArrayList<Car> availableCars = new ArrayList<Car>();
+    //ArrayList<Car> availableCars = new ArrayList<Car>();
 
     /*
     DUMMY DATA
@@ -25,12 +29,45 @@ public static void main (String args[]) {
     availableCars.add(new Car("FIAT", "500L", "Estate", "JS2A 8SA", 50000, 11, 200, 20));
 
     System.out.println("Please begin by entering the make of the car you wish to rent: ");
-    Scanner carMakeInput = new Scanner(System.in);
+    Scanner userPropertySelect = new Scanner(System.in);
 
-    System.out.println(checkIfCarPropertyExists("Citroen", "C4", "Estate", availableCars, 2));
+    String make = "citroen";
+    String model = "c4";
+    String style = "Estate";
+    /*do {
+    String userCarMakeSelection = userPropertySelect.next();
+} while (checkifMakeExists("Audi") == false);*/
 
+//System.out.println(checkifMakeExists(make));
+//System.out.println(checkifModelExists(make, model));
+System.out.println(checkifStyleExists(make, model, style));
 }
 
+public static boolean checkifMakeExists(String userInputMake) {
+    for (Car car : availableCars) {
+        if (userInputMake.equalsIgnoreCase(car.getMake())) {
+            return true;
+        }
+    } return false;
+}
+
+public static boolean checkifModelExists(String userInputMake, String userInputModel) {
+    for (Car car : availableCars) {
+        if (userInputMake.equalsIgnoreCase(car.getMake()) && userInputModel.equalsIgnoreCase(car.getModel())) {
+            return true;
+        }
+    } return false;   
+}
+
+public static boolean checkifStyleExists(String userInputMake, String userInputModel, String userInputStyle) {
+    for (Car car : availableCars) {
+        if (userInputMake.equalsIgnoreCase(car.getMake()) && userInputModel.equalsIgnoreCase(car.getModel()) && userInputStyle.equalsIgnoreCase(car.getStyle())) {
+            return true;
+        }
+    } return false;   
+}
+
+/*
 public static boolean checkIfCarPropertyExists(String userInputMake, String userInputModel, String userInputStyle, ArrayList<Car> availableCars, int userInputOption) {
     for (Car propertySelect : availableCars) {
         if (userInputOption == 0 && userInputMake.equals(propertySelect.getMake())) {
@@ -42,15 +79,6 @@ public static boolean checkIfCarPropertyExists(String userInputMake, String user
         }
     }
     return false;
-}
-/*
-public static Car findCarProperty(String wantedMake, ArrayList<Car> availableCars) {
-    for (Car carSelect : availableCars) {
-        if (wantedMake.equals(carSelect.getMake())) {
-            return carSelect;
-        }
-    }
-    return null;
 }
 */
 
