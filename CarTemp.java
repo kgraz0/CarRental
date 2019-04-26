@@ -23,36 +23,27 @@ public static void main (String args[]) {
     availableCars.add(new Car("Citroen", "C4", "Hatchback", "9DSA 72B", 150000, 13, 20, 20));
     availableCars.add(new Car("FIAT", "500", "Hatchback", "555A KDS", 49500, 9, 130, 5));
     availableCars.add(new Car("FIAT", "500L", "Estate", "JS2A 8SA", 50000, 11, 200, 20));
-    
-    /*
-    for (Car loop: availableCars) {
-        System.out.println(loop);
-    }
-    */
 
     System.out.println("Please begin by entering the make of the car you wish to rent: ");
     Scanner carMakeInput = new Scanner(System.in);
 
-    //String carMakeInputOption = carMakeInput.next();
+    System.out.println(checkIfCarPropertyExists("Citroen", "C4", "Estate", availableCars, 2));
 
-    System.out.println(findCarProperty("Audi", availableCars));
-/*
-    while 
-
-    for (Car carSelect : availableCars) {
-        while (carMakeInputOption != carSelect.getMake()) {
-            System.out.println(carMakeInputOption + carSelect.getMake());
-            carMakeInputOption = carMakeInput.next();
-        }
-
-        System.out.println(carSelect.getMake());
-        //String carMakeInputOption = carMakeInput.next();
-        //while (carMakeInputOption != carSelect.getMake()) {
-        //}
-    }
-    */
 }
 
+public static boolean checkIfCarPropertyExists(String userInputMake, String userInputModel, String userInputStyle, ArrayList<Car> availableCars, int userInputOption) {
+    for (Car propertySelect : availableCars) {
+        if (userInputOption == 0 && userInputMake.equals(propertySelect.getMake())) {
+            return true;
+        } else if (userInputOption == 1 && userInputMake.equals(propertySelect.getMake()) && userInputModel.equals(propertySelect.getModel())) {
+            return true;
+        } else if (userInputOption == 2 && userInputMake.equals(propertySelect.getMake()) && userInputModel.equals(propertySelect.getModel()) && userInputStyle.equals(propertySelect.getStyle())) {
+            return true;
+        }
+    }
+    return false;
+}
+/*
 public static Car findCarProperty(String wantedMake, ArrayList<Car> availableCars) {
     for (Car carSelect : availableCars) {
         if (wantedMake.equals(carSelect.getMake())) {
@@ -61,6 +52,7 @@ public static Car findCarProperty(String wantedMake, ArrayList<Car> availableCar
     }
     return null;
 }
+*/
 
 }
         /*
