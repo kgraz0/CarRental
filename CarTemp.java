@@ -78,7 +78,6 @@ int userInputRentDays = -1;
         if (userInputRentDays < 1) {
             System.out.println("Please enter a positive number.");
         } else {
-            System.out.println("Thanks!");
             break;
         }
     } catch (InputMismatchException e) {
@@ -87,10 +86,12 @@ int userInputRentDays = -1;
 }
 
 //String make, model, style and userInputRentDays;
-selectAvailableCar(make, model, style);
+ArrayList<Car> foundAvailableCars = selectAvailableCar(make, model, style);
+System.out.println("Available cars found based on your search query: " + make.toUpperCase() + " " + model.toUpperCase() + " " + style.toUpperCase());
+System.out.println(foundAvailableCars);
 }
 
-public static void selectAvailableCar(String userInputMake, String userInputModel, String userInputStyle) {
+public static ArrayList<Car> selectAvailableCar(String userInputMake, String userInputModel, String userInputStyle) {
 
     ArrayList<Car> foundAvailableCars = new ArrayList<Car>(); 
     
@@ -99,8 +100,7 @@ public static void selectAvailableCar(String userInputMake, String userInputMode
             foundAvailableCars.add(car);
         }
     }
-
-    System.out.println(foundAvailableCars);
+    return foundAvailableCars;
 }
 
 public static boolean checkifMakeExists(String userInputMake) {
