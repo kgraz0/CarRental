@@ -10,8 +10,6 @@ public class CarTemp {
 
 public static void main (String args[]) {
 
-    //ArrayList<Car> availableCars = new ArrayList<Car>();
-
     /*
     DUMMY DATA
     // make, model, style, reg number, totalMiles, insuranceGroup, dayRate, taxRate
@@ -31,16 +29,18 @@ public static void main (String args[]) {
     System.out.println("Please begin by entering the make of the car you wish to rent: ");
     Scanner userPropertySelect = new Scanner(System.in);
 
-    String make = "citroen";
-    String model = "c4";
-    String style = "Estate";
-    /*do {
-    String userCarMakeSelection = userPropertySelect.next();
-} while (checkifMakeExists("Audi") == false);*/
+    String userInputMake, model, style = "";
 
-//System.out.println(checkifMakeExists(make));
-//System.out.println(checkifModelExists(make, model));
-//System.out.println(checkifStyleExists(make, model, style));
+    while (true) {
+    userInputMake = userPropertySelect.next();
+
+    if (checkifMakeExists(userInputMake) == true) {
+        System.out.println("You have selected " + userInputMake);
+        break;
+    } else {
+        System.out.println("We do not currently have cars of this make available. Please try a different one.");
+    }
+}
 }
 
 public static boolean checkifMakeExists(String userInputMake) {
@@ -66,7 +66,6 @@ public static boolean checkifStyleExists(String userInputMake, String userInputM
         }
     } return false;   
 }
-
 }
         /*
 
