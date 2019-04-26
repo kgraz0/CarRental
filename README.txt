@@ -1,7 +1,7 @@
 Car Rental System with the user being able to select the following attributes, if available, for rental;
 1. The make of the car
 2. The model of the car (dependant on #1)
-3. The style of the car (Dependant on #1 and #2)
+3. The style of the car (dependant on #1 and #2)
 
 Three classes (CarTemp, CarBooking and Car) are used; CarBooking inherits Car.
 
