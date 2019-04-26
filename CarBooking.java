@@ -1,6 +1,6 @@
 public class CarBooking extends Car {
 	int numOfDays;
-	static int priceWithTax;
+	int priceWithTax;
 	Car selectedCar;
 
 	public CarBooking(Car selectedCar, int numOfDays) {
@@ -21,12 +21,13 @@ public void setNumOfDays(int numOfDays) {
 	this.numOfDays = numOfDays;
 }
 
-// set total price 
-public static void setPriceWithTax(Car selectedCar, int numOfDays) {
+public void setPriceWithTax(Car selectedCar, int numOfDays) {
 	int basePrice = selectedCar.getdayBasePrice();
 	int taxRate = selectedCar.getTaxRate(); 
+	int totalTax = ((numOfDays * basePrice) * taxRate) / 100; 
 
-	priceWithTax = (basePrice + (basePrice * taxRate / 100)) * numOfDays;
+	priceWithTax = (numOfDays * basePrice) + totalTax;
+	//priceWithTax = ((basePrice + (basePrice * taxRate / 100))) * numOfDays;
 }
 
 @Override
