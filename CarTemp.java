@@ -1,136 +1,138 @@
-import java.io.*;
-import java.lang.*;
 import java.util.*;
 
 public class CarTemp {
 
-    public static ArrayList<Car> availableCars = new ArrayList<Car>();
-
 public static void main (String args[]) {
 
-    /*
-    DUMMY DATA
-    // make, model, style, reg number, totalMiles, insuranceGroup, dayRate, taxRate
-    */
-    availableCars.add(new Car("Audi", "A1", "Estate", "SL42 SMR", 30000, 9, 100, 20));
-    availableCars.add(new Car("Audi", "A1", "Hatchback", "ER39 DLR", 95000, 9, 200, 20));
-    availableCars.add(new Car("Audi", "A1", "Hatchback", "BR11 LDI", 50000, 9, 300, 20));
-    availableCars.add(new Car("Audi", "A3", "Estate", "DA28 ABL", 1000, 16, 500, 10));
-    availableCars.add(new Car("Audi", "A3", "Hatchback", "A9W2 1AF", 20000, 19, 250, 15));
-    availableCars.add(new Car("BMW", "S1", "Estate", "A5M3 1K2", 5000, 18, 300, 10));
-    availableCars.add(new Car("BMW", "S1", "Hatchback", "LA9S 2JH", 10000, 18, 300, 15));
-    availableCars.add(new Car("BMW", "S3", "Estate", "JDS2 A31", 100000, 20, 50, 10));
-    availableCars.add(new Car("Citroen", "C1", "Estate", "HDS1 ISD", 33000, 1, 100, 12));
-    availableCars.add(new Car("Citroen", "C4", "Hatchback", "9DSA 72B", 150000, 13, 20, 20));
-    availableCars.add(new Car("FIAT", "500", "Hatchback", "555A KDS", 49500, 9, 130, 5));
-    availableCars.add(new Car("FIAT", "500L", "Estate", "JS2A 8SA", 50000, 11, 200, 20));
+    ArrayList<Car> availableCarArray = new ArrayList<Car>();
+    String chosenCarMake = "";
+    String chosenCarModel = "";
+    String chosenCarStyle = "";
+    boolean makeAvailable = false;
+    boolean modelAvailable = false;
+    boolean styleAvailable = false;
+    boolean optionAvailable = false;
+    boolean rentDaysAvailable = false;
+    int userOptionRentDayInput = -1;
+    int chosenOption = -1;
+    int chosenRentDays = -1;
+
+    availableCarArray = loadCarDummyData(availableCarArray);
 
     System.out.println("Please begin by entering the make of the car you wish to rent: ");
-    Scanner userPropertySelect = new Scanner(System.in);
-
-    String make = "";
-    String model = "";
-    String style = "";
-    boolean makeMatched = false;
-    boolean modelMatched = false;
-    boolean styleMatched = false;
+    Scanner userCarPropertySelect = new Scanner(System.in);
 
     while (true) {
-    
-    String userInputMake = userPropertySelect.next();
 
-    if (checkifMakeExists(userInputMake) == true && makeMatched == false) {
-        make = userInputMake;
+    String userInput = userCarPropertySelect.next();
+
+    if (checkifMakeExists(userInput, availableCarArray) == true && makeAvailable == false) {
+        chosenCarMake = userInput;
         System.out.println("Great! Next, please select the car model.");
-        makeMatched = true;
+        makeAvailable = true;
         continue;
     } 
-    if (checkifModelExists(make, userInputMake) == true && modelMatched == false) {
-        model = userInputMake;
+    if (checkifModelExists(chosenCarMake, userInput, availableCarArray) == true && modelAvailable == false) {
+        chosenCarModel = userInput;
         System.out.println("Great! Next, please select the car style.");
-        modelMatched = true;
+        modelAvailable = true;
         continue;
     }
 
-    if (checkifStyleExists(make, model, userInputMake) == true && styleMatched == false) {
-        style = userInputMake;
-        System.out.println("To be expanded");
-        styleMatched = true;
+    if (checkifStyleExists(chosenCarMake, chosenCarModel, userInput, availableCarArray) == true && styleAvailable == false) {
+        chosenCarStyle = userInput;
+        styleAvailable = true;
         break;
     }
     System.out.println("Not available. Please try again.");
     }
 
-ArrayList<Car> foundAvailableCars = selectAvailableCar(make, model, style);
-System.out.println("Available cars found based on your search query: " + make.toUpperCase() + " " + model.toUpperCase() + " " + style.toUpperCase() + "\n");
-System.out.println(foundAvailableCars);
+ArrayList<Car> foundAvailableCarArray = selectAvailableCar(chosenCarMake, chosenCarModel, chosenCarStyle, availableCarArray);
+
+System.out.println("Available cars found based on your search query: " + chosenCarMake.toUpperCase() + " " + chosenCarModel.toUpperCase() + " " + chosenCarStyle.toUpperCase() + "\n");
+System.out.println(foundAvailableCarArray);
 
 System.out.println("\n" + "Please select one of the available cars by entering the corresponding number with the top one starting from 0.");
 
-    int userAvailableCarSelection = -1;
-    int selectedOption = -1;
-    int selectedRentDays = -1;
-    boolean userAvailableCarSelectionMatched = false;
-    boolean userInputRentDaysMatched = false;
-
     while (true) {
     try {
-        userAvailableCarSelection = userPropertySelect.nextInt();
+        userOptionRentDayInput = userCarPropertySelect.nextInt();
 
-        if (userAvailableCarSelection >= 0 && userAvailableCarSelection <= foundAvailableCars.size()-1 && userAvailableCarSelectionMatched == false) {
-            System.out.println("Car selected successfully.");
-            userAvailableCarSelectionMatched = true;
-            selectedOption = userAvailableCarSelection;
+        if (userOptionRentDayInput >= 0 && userOptionRentDayInput <= foundAvailableCarArray.size()-1 && optionAvailable == false) {
+            System.out.println("Please enter the amount of rent days: ");
+            optionAvailable = true;
+            chosenOption = userOptionRentDayInput;
             continue;
         }
-        if (userAvailableCarSelection > 0 && userAvailableCarSelectionMatched == true && userInputRentDaysMatched == false) {
-            userInputRentDaysMatched = true;
-            selectedRentDays = userAvailableCarSelection;
+        if (userOptionRentDayInput > 0 && optionAvailable == true && rentDaysAvailable == false) {
+            rentDaysAvailable = true;
+            chosenRentDays = userOptionRentDayInput;
             break;
         }
         System.out.println("Please enter a positive number that is within the selection.");
     } catch (InputMismatchException e) {
     System.out.println("Please enter a number.");
     } 
-    userPropertySelect.nextLine();
+    userCarPropertySelect.nextLine();
 }
 
-CarBooking selectedCar = new CarBooking(foundAvailableCars.get(selectedOption), selectedRentDays);
-selectedCar.setPriceWithTax(foundAvailableCars.get(selectedOption), selectedRentDays);
+CarBooking selectedCar = new CarBooking(foundAvailableCarArray.get(chosenOption), chosenRentDays);
+selectedCar.setPriceWithTax(foundAvailableCarArray.get(chosenOption), chosenRentDays);
 System.out.println(selectedCar + "\n" + "\n" + "Thanks for booking with us!");
 }
 
+public static ArrayList<Car> loadCarDummyData(ArrayList<Car> listOfCars) {
 
-public static ArrayList<Car> selectAvailableCar(String userInputMake, String userInputModel, String userInputStyle) {
+    /*
+    DUMMY DATA
+    // make, model, style, reg number, totalMiles, insuranceGroup, dayRate, taxRate
+    */
+    listOfCars.add(new Car("Audi", "A1", "Estate", "SL42 SMR", 30000, 9, 100, 20));
+    listOfCars.add(new Car("Audi", "A1", "Hatchback", "ER39 DLR", 95000, 9, 200, 20));
+    listOfCars.add(new Car("Audi", "A1", "Hatchback", "BR11 LDI", 50000, 9, 300, 20));
+    listOfCars.add(new Car("Audi", "A3", "Estate", "DA28 ABL", 1000, 16, 500, 10));
+    listOfCars.add(new Car("Audi", "A3", "Hatchback", "A9W2 1AF", 20000, 19, 250, 15));
+    listOfCars.add(new Car("BMW", "S1", "Estate", "A5M3 1K2", 5000, 18, 300, 10));
+    listOfCars.add(new Car("BMW", "S1", "Hatchback", "LA9S 2JH", 10000, 18, 300, 15));
+    listOfCars.add(new Car("BMW", "S3", "Estate", "JDS2 A31", 100000, 20, 50, 10));
+    listOfCars.add(new Car("Citroen", "C1", "Estate", "HDS1 ISD", 33000, 1, 100, 12));
+    listOfCars.add(new Car("Citroen", "C4", "Hatchback", "9DSA 72B", 150000, 13, 20, 20));
+    listOfCars.add(new Car("FIAT", "500", "Hatchback", "555A KDS", 49500, 9, 130, 5));
+    listOfCars.add(new Car("FIAT", "500L", "Estate", "JS2A 8SA", 50000, 11, 200, 20));
 
-    ArrayList<Car> foundAvailableCars = new ArrayList<Car>(); 
-    
-    for (Car car : availableCars) {
-        if (userInputMake.equalsIgnoreCase(car.getMake()) && userInputModel.equalsIgnoreCase(car.getModel()) && userInputStyle.equalsIgnoreCase(car.getStyle())) {
-            foundAvailableCars.add(car);
-        }
-    }
-    return foundAvailableCars;
+    return listOfCars;
 }
 
-public static boolean checkifMakeExists(String userInputMake) {
-    for (Car car : availableCars) {
+public static ArrayList<Car> selectAvailableCar(String userInputMake, String userInputModel, String userInputStyle, ArrayList<Car> listOfCars) {
+
+    ArrayList<Car> foundAvailableCarArray = new ArrayList<Car>(); 
+    
+    for (Car car : listOfCars) {
+        if (userInputMake.equalsIgnoreCase(car.getMake()) && userInputModel.equalsIgnoreCase(car.getModel()) && userInputStyle.equalsIgnoreCase(car.getStyle())) {
+            foundAvailableCarArray.add(car);
+        }
+    }
+    return foundAvailableCarArray;
+}
+
+public static boolean checkifMakeExists(String userInputMake, ArrayList<Car> listOfCars) {
+    for (Car car : listOfCars) {
         if (userInputMake.equalsIgnoreCase(car.getMake())) {
             return true;
         }
     } return false;
 }
 
-public static boolean checkifModelExists(String userInputMake, String userInputModel) {
-    for (Car car : availableCars) {
+public static boolean checkifModelExists(String userInputMake, String userInputModel, ArrayList<Car> listOfCars) {
+    for (Car car : listOfCars) {
         if (userInputMake.equalsIgnoreCase(car.getMake()) && userInputModel.equalsIgnoreCase(car.getModel())) {
             return true;
         }
     } return false;   
 }
 
-public static boolean checkifStyleExists(String userInputMake, String userInputModel, String userInputStyle) {
-    for (Car car : availableCars) {
+public static boolean checkifStyleExists(String userInputMake, String userInputModel, String userInputStyle, ArrayList<Car> listOfCars) {
+    for (Car car : listOfCars) {
         if (userInputMake.equalsIgnoreCase(car.getMake()) && userInputModel.equalsIgnoreCase(car.getModel()) && userInputStyle.equalsIgnoreCase(car.getStyle())) {
             return true;
         }
