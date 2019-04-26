@@ -6,51 +6,64 @@ public class CarTemp {
 
 public static void main (String args[]) {
 
-    ArrayList<Car> myList = new ArrayList<Car>();
+    ArrayList<Car> availableCars = new ArrayList<Car>();
 
     /*
     DUMMY DATA
     // make, model, style, reg number, totalMiles, insuranceGroup, dayRate, taxRate
     */
-    myList.add(new Car("Audi", "A1", "Estate", "SL42 SMR", 30000, 9, 100, 20));
-    myList.add(new Car("Audi", "A1", "Hatchback", "ER39 DLR", 95000, 9, 200, 20));
-    myList.add(new Car("Audi", "A3", "Estate", "DA28 ABL", 1000, 16, 500, 10));
-    myList.add(new Car("Audi", "A3", "Hatchback", "A9W2 1AF", 20000, 19, 250, 15));
-    myList.add(new Car("BMW", "S1", "Estate", "A5M3 1K2", 5000, 18, 300, 10));
-    myList.add(new Car("BMW", "S1", "Hatchback", "LA9S 2JH", 10000, 18, 300, 15));
-    myList.add(new Car("BMW", "S3", "Estate", "JDS2 A31", 100000, 20, 50, 10));
-    myList.add(new Car("Citroen", "C1", "Estate", "HDS1 ISD", 33000, 1, 100, 12));
-    myList.add(new Car("Citroen", "C4", "Hatchback", "9DSA 72B", 150000, 13, 20, 20));
-    myList.add(new Car("FIAT", "500", "Hatchback", "555A KDS", 49500, 9, 130, 5));
-    myList.add(new Car("FIAT", "500L", "Estate", "JS2A 8SA", 50000, 11, 200, 20));
+    availableCars.add(new Car("Audi", "A1", "Estate", "SL42 SMR", 30000, 9, 100, 20));
+    availableCars.add(new Car("Audi", "A1", "Hatchback", "ER39 DLR", 95000, 9, 200, 20));
+    availableCars.add(new Car("Audi", "A3", "Estate", "DA28 ABL", 1000, 16, 500, 10));
+    availableCars.add(new Car("Audi", "A3", "Hatchback", "A9W2 1AF", 20000, 19, 250, 15));
+    availableCars.add(new Car("BMW", "S1", "Estate", "A5M3 1K2", 5000, 18, 300, 10));
+    availableCars.add(new Car("BMW", "S1", "Hatchback", "LA9S 2JH", 10000, 18, 300, 15));
+    availableCars.add(new Car("BMW", "S3", "Estate", "JDS2 A31", 100000, 20, 50, 10));
+    availableCars.add(new Car("Citroen", "C1", "Estate", "HDS1 ISD", 33000, 1, 100, 12));
+    availableCars.add(new Car("Citroen", "C4", "Hatchback", "9DSA 72B", 150000, 13, 20, 20));
+    availableCars.add(new Car("FIAT", "500", "Hatchback", "555A KDS", 49500, 9, 130, 5));
+    availableCars.add(new Car("FIAT", "500L", "Estate", "JS2A 8SA", 50000, 11, 200, 20));
+    
     /*
-    for (Car loop: myList) {
+    for (Car loop: availableCars) {
         System.out.println(loop);
     }
     */
+
+    System.out.println("Please begin by entering the make of the car you wish to rent: ");
+    Scanner carMakeInput = new Scanner(System.in);
+
+    //String carMakeInputOption = carMakeInput.next();
+
+    System.out.println(findCarProperty("Audi", availableCars));
+/*
+    while 
+
+    for (Car carSelect : availableCars) {
+        while (carMakeInputOption != carSelect.getMake()) {
+            System.out.println(carMakeInputOption + carSelect.getMake());
+            carMakeInputOption = carMakeInput.next();
+        }
+
+        System.out.println(carSelect.getMake());
+        //String carMakeInputOption = carMakeInput.next();
+        //while (carMakeInputOption != carSelect.getMake()) {
+        //}
+    }
+    */
 }
+
+public static Car findCarProperty(String wantedMake, ArrayList<Car> availableCars) {
+    for (Car carSelect : availableCars) {
+        if (wantedMake.equals(carSelect.getMake())) {
+            return carSelect;
+        }
+    }
+    return null;
+}
+
 }
         /*
-public class Car {
-    private static String name;
-    private static String name2;
-    private static String name3;
-    private static String name4;
-    private static String carMake;
-    private static String carModel;
-    private static String carOption;
-    
-public static class Booking extends Car {
-    private static int dayInput;
-    private static int taxRate;
-    private static final int multiplier = 2;
-    
-public static class RentalDetails extends Booking {
-    private static String carReg;
-    private static int totalMiles;
-    private static String insGroup;
-    private static int totalPrice;
-
 static void switchforMake() throws InterruptedException {
 switch (name) {
             case "Audi": carMake = "Audi"; break;
