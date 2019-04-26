@@ -28,43 +28,31 @@ public static void main (String args[]) {
     System.out.println("Please begin by entering the make of the car you wish to rent: ");
     Scanner userPropertySelect = new Scanner(System.in);
 
-    String make, model, style = "";
+    String make = "";
+    String model = "";
+    String style = "";
 
     while (true) {
-    String userInputMake = userPropertySelect.next();
+        String userInputMake = userPropertySelect.next();
 
     if (checkifMakeExists(userInputMake) == true) {
         make = userInputMake;
         System.out.println("Great! Next, please select the car model.");
-        break;
-    } else {
-        System.out.println("We do not currently have cars of this make available. Please try a different one.");
-    }
-}
-
-    while (true) {
-    String userInputModel = userPropertySelect.next();
-
-    if (checkifModelExists(make, userInputModel) == true) {
-        model = userInputModel;
+        continue;
+    } 
+    if (checkifModelExists(make, userInputMake) == true) {
+        model = userInputMake;
         System.out.println("Great! Next, please select the car style.");
-        break;
-    } else {
-        System.out.println("We do not currently have cars of this model available. Please try a different one.");
+        continue;
     }
-}
 
-    while (true) {
-    String userInputStyle = userPropertySelect.next();
-
-    if (checkifStyleExists(make, model, userInputStyle) == true) {
-        style = userInputStyle;
-        System.out.println("Finally, please enter for how many days you wish to rent this car for.");
+    if (checkifStyleExists(make, model, userInputMake) == true) {
+        style = userInputMake;
+        System.out.println("Please enter the number of days you wish to rent: ");
         break;
-    } else {
-        System.out.println("We do not currently have cars of this style available. Please try a different one.");
     }
-}
+    System.out.println("Not available. Please try again.");
+    }
 
 int userInputRentDays = -1;
     
