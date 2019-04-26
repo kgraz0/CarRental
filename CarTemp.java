@@ -67,44 +67,36 @@ System.out.println(foundAvailableCars);
 
 System.out.println("\n" + "Please select one of the available cars by entering the corresponding number with the top one starting from 0.");
 
-int userAvailableCarSelection = -1;
-    
+    int userAvailableCarSelection = -1;
+    int selectedOption = -1;
+    int selectedRentDays = -1;
+    boolean userAvailableCarSelectionMatched = false;
+    boolean userInputRentDaysMatched = false;
+
     while (true) {
     try {
         userAvailableCarSelection = userPropertySelect.nextInt();
 
-        if (userAvailableCarSelection < 0) {
-            System.out.println("Please enter a positive number.");
-        } else if (userAvailableCarSelection > foundAvailableCars.size()-1) {
-            System.out.println("Please enter a number that is within given selection.");
-        } 
-        else {
+        if (userAvailableCarSelection >= 0 && userAvailableCarSelection <= foundAvailableCars.size()-1 && userAvailableCarSelectionMatched == false) {
+            System.out.println("Car selected successfully.");
+            userAvailableCarSelectionMatched = true;
+            selectedOption = userAvailableCarSelection;
+            continue;
+        }
+        if (userAvailableCarSelection > 0 && userAvailableCarSelectionMatched == true && userInputRentDaysMatched == false) {
+            userInputRentDaysMatched = true;
+            selectedRentDays = userAvailableCarSelection;
             break;
         }
-    } catch (InputMismatchException e) {
-        System.out.println("Please enter a number.");
-    } userPropertySelect.nextLine();
-}
-
-int userInputRentDays = -1;
-    
-    while (userInputRentDays < 1) {
-    try {
-        userInputRentDays = userPropertySelect.nextInt();
-
-        if (userInputRentDays < 1) {
-            System.out.println("Please enter a positive number.");
-        } else {
-            break;
-        }
+        System.out.println("Please enter a positive number that is within the selection.");
     } catch (InputMismatchException e) {
     System.out.println("Please enter a number.");
-} userPropertySelect.nextLine();
+    } 
+    userPropertySelect.nextLine();
 }
 
-
-CarBooking selectedCar = new CarBooking(foundAvailableCars.get(userAvailableCarSelection), userInputRentDays);
-selectedCar.setPriceWithTax(foundAvailableCars.get(userAvailableCarSelection), userInputRentDays);
+CarBooking selectedCar = new CarBooking(foundAvailableCars.get(selectedOption), selectedRentDays);
+selectedCar.setPriceWithTax(foundAvailableCars.get(selectedOption), selectedRentDays);
 System.out.println(selectedCar + "\n" + "\n" + "Thanks for booking with us!");
 }
 
