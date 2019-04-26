@@ -89,12 +89,12 @@ public void setdayBasePrice(int dayBasePrice) {
 
 @Override
     public String toString() {
-        return "Car{" +
-                "Make='" + make + '\'' +
-                ", Model=" + model +
-                ", Style=" + style +
-                ", Registration Number =" + registrationNumber +
-                ", Total Miles='" + totalMiles + '\'' +
-                '}';
+        return 
+        "Registration number: " + registrationNumber
+        + "\n" + "Total Miles: " + totalMiles 
+        + "\n" + "Insurance Group: " + insuranceGroup
+        + "\n" + "Tax Rate: " + taxRate
+        + "\n" + "Base Day Price: " + dayBasePrice 
+        + "\n" + "\n";
     }
-}
+    }
