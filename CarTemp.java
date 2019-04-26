@@ -1,6 +1,3 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.io.*;
 import java.lang.*;
 import java.util.*;
@@ -85,13 +82,33 @@ int userInputRentDays = -1;
 } userPropertySelect.nextLine();
 }
 
-//String make, model, style and userInputRentDays;
 ArrayList<Car> foundAvailableCars = selectAvailableCar(make, model, style);
-System.out.println("Available cars found based on your search query: " + make.toUpperCase() + " " + model.toUpperCase() + " " + style.toUpperCase());
+System.out.println("Available cars found based on your search query: " + make.toUpperCase() + " " + model.toUpperCase() + " " + style.toUpperCase() + "\n");
 System.out.println(foundAvailableCars);
 
-CarBooking selectedCar = new CarBooking(foundAvailableCars.get(0), userInputRentDays);
-selectedCar.setPriceWithTax(foundAvailableCars.get(0), userInputRentDays);
+System.out.println("\n" + "Please select one of the available cars by entering the corresponding number with the top one starting from 0.");
+
+int userAvailableCarSelection = -1;
+    
+    while (true) {
+    try {
+        userAvailableCarSelection = userPropertySelect.nextInt();
+
+        if (userAvailableCarSelection < 0) {
+            System.out.println("Please enter a positive number.");
+        } else if (userAvailableCarSelection > foundAvailableCars.size()-1) {
+            System.out.println("Please enter a number that is within given selection.");
+        } 
+        else {
+            break;
+        }
+    } catch (InputMismatchException e) {
+        System.out.println("Please enter a number.");
+    } userPropertySelect.nextLine();
+}
+
+CarBooking selectedCar = new CarBooking(foundAvailableCars.get(userAvailableCarSelection), userInputRentDays);
+selectedCar.setPriceWithTax(foundAvailableCars.get(userAvailableCarSelection), userInputRentDays);
 System.out.println(selectedCar + "\n" + "\n" + "Thanks for booking with us!");
 }
 
