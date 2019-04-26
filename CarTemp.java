@@ -1,5 +1,35 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+public class CarTemp {
+
+public static void main (String args[]) {
+
+    ArrayList<Car> myList = new ArrayList<Car>();
+
+    /*
+    DUMMY DATA
+    // make, model, style, reg number, totalMiles, insuranceGroup, dayRate, taxRate
+    */
+    myList.add(new Car("Audi", "A1", "Estate", "SL42 SMR", 30000, 9, 100, 20));
+    myList.add(new Car("Audi", "A1", "Hatchback", "ER39 DLR", 95000, 9, 200, 20));
+    myList.add(new Car("Audi", "A3", "Estate", "DA28 ABL", 1000, 16, 500, 10));
+    myList.add(new Car("Audi", "A3", "Hatchback", "A9W2 1AF", 20000, 19, 250, 15));
+    myList.add(new Car("BMW", "S1", "Estate", "A5M3 1K2", 5000, 18, 300, 10));
+    myList.add(new Car("BMW", "S1", "Hatchback", "LA9S 2JH", 10000, 18, 300, 15));
+    myList.add(new Car("BMW", "S3", "Estate", "JDS2 A31", 100000, 20, 50, 10));
+    myList.add(new Car("Citroen", "C1", "Estate", "HDS1 ISD", 33000, 1, 100, 12));
+    myList.add(new Car("Citroen", "C4", "Hatchback", "9DSA 72B", 150000, 13, 20, 20));
+    myList.add(new Car("FIAT", "500", "Hatchback", "555A KDS", 49500, 9, 130, 5));
+    myList.add(new Car("FIAT", "500L", "Estate", "JS2A 8SA", 50000, 11, 200, 20));
+
+
+    //System.out.println(myList);
+
+}
+}
+        /*
 public class Car {
     private static String name;
     private static String name2;
@@ -226,3 +256,4 @@ switchforDetails();
 }
 }
 }
+*/
