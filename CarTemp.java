@@ -31,44 +31,35 @@ public static void main (String args[]) {
     String make = "";
     String model = "";
     String style = "";
+    boolean makeMatched = false;
+    boolean modelMatched = false;
+    boolean styleMatched = false;
 
     while (true) {
-        String userInputMake = userPropertySelect.next();
+    
+    String userInputMake = userPropertySelect.next();
 
-    if (checkifMakeExists(userInputMake) == true) {
+    if (checkifMakeExists(userInputMake) == true && makeMatched == false) {
         make = userInputMake;
         System.out.println("Great! Next, please select the car model.");
+        makeMatched = true;
         continue;
     } 
-    if (checkifModelExists(make, userInputMake) == true) {
+    if (checkifModelExists(make, userInputMake) == true && modelMatched == false) {
         model = userInputMake;
         System.out.println("Great! Next, please select the car style.");
+        modelMatched = true;
         continue;
     }
 
-    if (checkifStyleExists(make, model, userInputMake) == true) {
+    if (checkifStyleExists(make, model, userInputMake) == true && styleMatched == false) {
         style = userInputMake;
-        System.out.println("Please enter the number of days you wish to rent: ");
+        System.out.println("To be expanded");
+        styleMatched = true;
         break;
     }
     System.out.println("Not available. Please try again.");
     }
-
-int userInputRentDays = -1;
-    
-    while (userInputRentDays < 1) {
-    try {
-        userInputRentDays = userPropertySelect.nextInt();
-
-        if (userInputRentDays < 1) {
-            System.out.println("Please enter a positive number.");
-        } else {
-            break;
-        }
-    } catch (InputMismatchException e) {
-    System.out.println("Please enter a number.");
-} userPropertySelect.nextLine();
-}
 
 ArrayList<Car> foundAvailableCars = selectAvailableCar(make, model, style);
 System.out.println("Available cars found based on your search query: " + make.toUpperCase() + " " + model.toUpperCase() + " " + style.toUpperCase() + "\n");
@@ -94,6 +85,23 @@ int userAvailableCarSelection = -1;
         System.out.println("Please enter a number.");
     } userPropertySelect.nextLine();
 }
+
+int userInputRentDays = -1;
+    
+    while (userInputRentDays < 1) {
+    try {
+        userInputRentDays = userPropertySelect.nextInt();
+
+        if (userInputRentDays < 1) {
+            System.out.println("Please enter a positive number.");
+        } else {
+            break;
+        }
+    } catch (InputMismatchException e) {
+    System.out.println("Please enter a number.");
+} userPropertySelect.nextLine();
+}
+
 
 CarBooking selectedCar = new CarBooking(foundAvailableCars.get(userAvailableCarSelection), userInputRentDays);
 selectedCar.setPriceWithTax(foundAvailableCars.get(userAvailableCarSelection), userInputRentDays);
