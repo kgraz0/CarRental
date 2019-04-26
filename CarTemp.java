@@ -23,10 +23,11 @@ public static void main (String args[]) {
     myList.add(new Car("Citroen", "C4", "Hatchback", "9DSA 72B", 150000, 13, 20, 20));
     myList.add(new Car("FIAT", "500", "Hatchback", "555A KDS", 49500, 9, 130, 5));
     myList.add(new Car("FIAT", "500L", "Estate", "JS2A 8SA", 50000, 11, 200, 20));
-
-
-    //System.out.println(myList);
-
+    /*
+    for (Car loop: myList) {
+        System.out.println(loop);
+    }
+    */
 }
 }
         /*

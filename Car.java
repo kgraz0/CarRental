@@ -1,6 +1,6 @@
 public class Car {
-	static String make;
-	static String model;
+	String make;
+	String model;
 	String style;
 	String registrationNumber;
 	int totalMiles;
@@ -23,11 +23,11 @@ public class Car {
 	}
 
 // setters and getters to update class values
-public static String getMake() {
+public String getMake() {
 	return make;
 }
 
-public static String getModel() {
+public String getModel() {
 	return model;
 }
 
@@ -89,7 +89,7 @@ public void setdayBasePrice(int dayBasePrice) {
 
 @Override
     public String toString() {
-        return "Player{" +
+        return "Car{" +
                 "Make='" + make + '\'' +
                 ", Model=" + model +
                 ", Style=" + style +
