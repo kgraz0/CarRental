@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.*;
 import java.lang.*;
+import java.util.*;
 
 public class CarTemp {
 
@@ -68,20 +69,23 @@ public static void main (String args[]) {
     }
 }
 
-    while (true) {
-    int userInputRentDays = userPropertySelect.nextInt();
+int userInputRentDays = -1;
+    
+    while (userInputRentDays < 1) {
+    try {
+        userInputRentDays = userPropertySelect.nextInt();
 
-    // NEEDS INPUT MISMATCH EXCEPTION CATCH
-    if (userInputRentDays > 0) {
-        rentDays = userInputRentDays;
-        System.out.println("Reached end of the sequence.");
-        break;
-    } else {
-        System.out.println("Please enter a positive number.");
-    }
+        if (userInputRentDays < 1) {
+            System.out.println("Please enter a positive number.");
+        } else {
+            System.out.println("Thanks!");
+            break;
+        }
+    } catch (InputMismatchException e) {
+    System.out.println("Entered a String!");
+} userPropertySelect.nextLine();
 }
 }
-
 
 public static boolean checkifMakeExists(String userInputMake) {
     for (Car car : availableCars) {
