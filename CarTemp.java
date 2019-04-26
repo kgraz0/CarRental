@@ -30,6 +30,7 @@ public static void main (String args[]) {
     Scanner userPropertySelect = new Scanner(System.in);
 
     String make, model, style = "";
+    int rentDays;
 
     while (true) {
     String userInputMake = userPropertySelect.next();
@@ -60,15 +61,27 @@ public static void main (String args[]) {
 
     if (checkifStyleExists(make, model, userInputStyle) == true) {
         style = userInputStyle;
-        System.out.println("You have reached the end of this input sequence.");
+        System.out.println("Finally, please enter for how many days you wish to rent this car for.");
         break;
     } else {
         System.out.println("We do not currently have cars of this style available. Please try a different one.");
     }
 }
 
+    while (true) {
+    int userInputRentDays = userPropertySelect.nextInt();
 
+    // NEEDS INPUT MISMATCH EXCEPTION CATCH
+    if (userInputRentDays > 0) {
+        rentDays = userInputRentDays;
+        System.out.println("Reached end of the sequence.");
+        break;
+    } else {
+        System.out.println("Please enter a positive number.");
+    }
 }
+}
+
 
 public static boolean checkifMakeExists(String userInputMake) {
     for (Car car : availableCars) {
