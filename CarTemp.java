@@ -29,18 +29,45 @@ public static void main (String args[]) {
     System.out.println("Please begin by entering the make of the car you wish to rent: ");
     Scanner userPropertySelect = new Scanner(System.in);
 
-    String userInputMake, model, style = "";
+    String make, model, style = "";
 
     while (true) {
-    userInputMake = userPropertySelect.next();
+    String userInputMake = userPropertySelect.next();
 
     if (checkifMakeExists(userInputMake) == true) {
-        System.out.println("You have selected " + userInputMake);
+        make = userInputMake;
+        System.out.println("Great! Next, please select the car model.");
         break;
     } else {
         System.out.println("We do not currently have cars of this make available. Please try a different one.");
     }
 }
+
+    while (true) {
+    String userInputModel = userPropertySelect.next();
+
+    if (checkifModelExists(make, userInputModel) == true) {
+        model = userInputModel;
+        System.out.println("Great! Next, please select the car style.");
+        break;
+    } else {
+        System.out.println("We do not currently have cars of this model available. Please try a different one.");
+    }
+}
+
+    while (true) {
+    String userInputStyle = userPropertySelect.next();
+
+    if (checkifStyleExists(make, model, userInputStyle) == true) {
+        style = userInputStyle;
+        System.out.println("You have reached the end of this input sequence.");
+        break;
+    } else {
+        System.out.println("We do not currently have cars of this style available. Please try a different one.");
+    }
+}
+
+
 }
 
 public static boolean checkifMakeExists(String userInputMake) {
