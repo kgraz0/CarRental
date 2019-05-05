@@ -17,13 +17,19 @@ public static void main (String args[]) {
     int chosenOption = -1;
     int chosenRentDays = -1;
 
+    // load dummy car objects into an array
     availableCarArray = loadCarDummyData(availableCarArray);
 
     System.out.println("Please begin by entering the make of the car you wish to rent: ");
     Scanner userCarPropertySelect = new Scanner(System.in);
 
+    /*
+    Prompt user to input the car make, model and style they wish to rent and check if the selection
+    is available by referencing the car objects in the availableCarArray array. Also check if
+    the model and style inputs correspond to the originally selected make (ie: Audi does not have BMW's model S1)
+    After checking, store the user's selected options in chosenCarMake, chosenCarModel and chosenCarStyle variables
+    */
     while (true) {
-
     String userInput = userCarPropertySelect.next();
 
     if (checkifMakeExists(userInput, availableCarArray) == true && makeAvailable == false) {
@@ -47,6 +53,7 @@ public static void main (String args[]) {
     System.out.println("Not available. Please try again.");
     }
 
+    // return the user's selected car object(-s) and store it in the new foundAvailableCarArray array
 ArrayList<Car> foundAvailableCarArray = selectAvailableCar(chosenCarMake, chosenCarModel, chosenCarStyle, availableCarArray);
 
 System.out.println("Available cars found based on your search query: " + chosenCarMake.toUpperCase() + " " + chosenCarModel.toUpperCase() + " " + chosenCarStyle.toUpperCase() + "\n");
@@ -54,6 +61,11 @@ System.out.println(foundAvailableCarArray);
 
 System.out.println("\n" + "Please select one of the available cars by entering the corresponding number with the top one starting from 0.");
 
+    /*
+    After the available car objects are printed on screen, the user is able to select which car object they wish to rent out of multiple
+    Then the user enters the number of days they wish to rent the selected car for. Both are stored in chosenOption (0-length of array-1)
+    and chosenRentDays
+    */
     while (true) {
     try {
         userOptionRentDayInput = userCarPropertySelect.nextInt();
@@ -76,7 +88,10 @@ System.out.println("\n" + "Please select one of the available cars by entering t
     userCarPropertySelect.nextLine();
 }
 
+// create a new booking with the selected car and number of rent days as parameters
 CarBooking selectedCar = new CarBooking(foundAvailableCarArray.get(chosenOption), chosenRentDays);
+
+// Call the CarBooking class object to calculate the total price of the booking
 selectedCar.setPriceWithTax(foundAvailableCarArray.get(chosenOption), chosenRentDays);
 System.out.println(selectedCar + "\n" + "\n" + "Thanks for booking with us!");
 }
@@ -84,8 +99,8 @@ System.out.println(selectedCar + "\n" + "\n" + "Thanks for booking with us!");
 public static ArrayList<Car> loadCarDummyData(ArrayList<Car> listOfCars) {
 
     /*
-    DUMMY DATA
-    // make, model, style, reg number, totalMiles, insuranceGroup, dayRate, taxRate
+    LOAD DUMMY CAR OBJECTS WITH DATA INTO ARRAY
+    make, model, style, reg number, totalMiles, insuranceGroup, dayRate, taxRate
     */
     listOfCars.add(new Car("Audi", "A1", "Estate", "SL42 SMR", 30000, 9, 100, 20));
     listOfCars.add(new Car("Audi", "A1", "Hatchback", "ER39 DLR", 95000, 9, 200, 20));

@@ -22,12 +22,15 @@ public void setNumOfDays(int numOfDays) {
 }
 
 public void setPriceWithTax(Car selectedCar, int numOfDays) {
+	/*
+	 calculate the total price of the car based on car's individual base price,
+	 tax rate and multiply that by number of days the user selected to rent for
+	*/
 	int basePrice = selectedCar.getdayBasePrice();
 	int taxRate = selectedCar.getTaxRate(); 
 	int totalTax = ((numOfDays * basePrice) * taxRate) / 100; 
 
 	priceWithTax = (numOfDays * basePrice) + totalTax;
-	//priceWithTax = ((basePrice + (basePrice * taxRate / 100))) * numOfDays;
 }
 
 @Override
